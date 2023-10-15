@@ -1,0 +1,24 @@
+{
+  "title": "Catalouge Schema",
+  "description": "Catalouge for prebuild templates",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "unique download url for the template"
+    },
+    "name": {
+      "type": "string",
+      "description": "name of the template"
+    },
+    "description": {
+      "type": "string",
+      "description": "description of the template"
+    }
+  },
+  "required": [
+    "url",
+    "name",
+    "description"
+  ]
+}
