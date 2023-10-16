@@ -106,4 +106,3 @@ const Hero = () => {
 
 export default Hero;
 
-// 04832230

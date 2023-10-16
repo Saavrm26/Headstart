@@ -1,4 +1,7 @@
 import React from "react";
+import Link from 'next/link'
+
+
 
 const Header = () => {
   return (
@@ -71,18 +74,18 @@ const Header = () => {
               </button>
             </div>
             <nav>
-              <a
+              <Link
                 className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-4"
-                href="/login"
+                href="/auth/login"
               >
                 Login
-              </a>
-              <a
+              </Link>
+              <Link
                 className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-4"
-                href="/login"
+                href="/auth/signup"
               >
                 SignUp
-              </a>
+              </Link>
             </nav>
           </div>
         </header>
