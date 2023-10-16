@@ -14,14 +14,14 @@ func SpawnJSONValidator(jsonPath string, nInstances uint) ([]*jsonschema.Schema,
 		return nil, err
 	}
 
-	schemaList := make([]*jsonschema.Schema, nInstances)
+	schemaList := make([]*jsonschema.Schema, 1)
 	schemaList[0] = sch
-  
-  for i := uint(1); i < nInstances; i++ {
-    var cpy *jsonschema.Schema
-    *cpy = *sch
-    schemaList = append(schemaList, cpy)
-  }
 
-  return schemaList, nil
+	for i := uint(1); i < nInstances; i++ {
+		var cpy *jsonschema.Schema = new(jsonschema.Schema)
+		*cpy = *sch
+		schemaList = append(schemaList, cpy)
+	}
+
+	return schemaList, nil
 }
