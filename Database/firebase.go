@@ -1,4 +1,4 @@
-package main
+package Database
 
 import (
 	"cloud.google.com/go/firestore"
@@ -45,7 +45,7 @@ func initializeStorage(ctx context.Context, opts option.ClientOption) error {
 	return nil
 }
 
-func initializeFirebase() error {
+func InitializeFirebase() error {
 	// Use a service account
 	ctx := context.Background()
 	opts := option.WithCredentialsFile(Utils.FullPath("Secrets/firebase-service-account.json"))

@@ -3,19 +3,21 @@ module hs/headstart
 go 1.21.3
 
 require (
+	cloud.google.com/go/firestore v1.13.0
+	cloud.google.com/go/storage v1.33.0
+	firebase.google.com/go v3.13.0+incompatible
+	github.com/davecgh/go-spew v1.1.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
+	google.golang.org/api v0.147.0
 )
 
 require (
 	cloud.google.com/go v0.110.8 // indirect
 	cloud.google.com/go/compute v1.23.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	cloud.google.com/go/firestore v1.13.0 // indirect
 	cloud.google.com/go/iam v1.1.2 // indirect
 	cloud.google.com/go/longrunning v0.5.1 // indirect
-	cloud.google.com/go/storage v1.33.0 // indirect
-	firebase.google.com/go v3.13.0+incompatible // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
@@ -50,7 +52,6 @@ require (
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/api v0.147.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20231002182017-d307bd883b97 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20231002182017-d307bd883b97 // indirect

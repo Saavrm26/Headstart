@@ -7,5 +7,6 @@ import (
 
 func CatalougeRoutes(router *gin.Engine) {
 	catalouge := router.Group("/catalouge")
+  catalouge.POST("/", Controllers.PostACatalouge)
 	catalouge.GET("/", Controllers.GetAllCatalouges)
 }
