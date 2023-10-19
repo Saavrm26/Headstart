@@ -21,3 +21,4 @@
 go.work
 headstart
 Secrets/**
+!Secrets/Readme.md
