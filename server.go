@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"hs/headstart/Routers"
-
 	"github.com/gin-gonic/gin"
+	"hs/headstart/Database"
+	"hs/headstart/Routers"
+	"log"
 )
 
-
-
 func main() {
-  fmt.Println(nCatalougeValidatorFreeList)
-  initCatalougeValidatorFreeList()
-
-	router := gin.Default() 
-  Routers.CatalougeRoutes(router)
+	if err := Database.InitializeFirebase(); err != nil {
+		log.Fatal(err)
+		return
+	}
+	initCatalougeValidatorFreeList()
+	router := gin.Default()
+	Routers.CatalougeRoutes(router)
 	router.Run(":8080")
 }
