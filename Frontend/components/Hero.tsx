@@ -1,6 +1,13 @@
+"use client"
 import React from "react";
+import { useRouter } from 'next/navigation';
 
 const Hero = () => {
+  const router = useRouter();
+
+  const handleButtonClick = () => {
+    router.push('/create');
+  };
   return (
     <>
       <div className="px-4 flex flex-col items-center mt-4">
@@ -97,7 +104,8 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <button className="bg-blue-700 text-white p-2 lg:p-3 border rounded-lg mx-[50%] lg:mx-2">All Templates</button>
+          <button className="bg-blue-700 hover:bg-white text-white hover:text-black p-2 lg:p-3 border hover:border-b-gray-600 rounded-lg mx-[50%] lg:mx-2 transition-transform duration-500 hover:scale-110 hover:shadow-lg">All Templates</button>
+          <button onClick={handleButtonClick} className="bg-blue-700 hover:bg-white text-white hover:text-black p-2 lg:p-3 border hover:border-b-gray-600 rounded-lg mx-[50%] lg:mx-2 transition-transform duration-500 hover:scale-110 hover:shadow-lg">Create</button>
         </div>
       </div>
     </>
