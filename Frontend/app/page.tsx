@@ -3,7 +3,10 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Templates from "@/components/Templates";
+
 export default function Home() {
+
+  // console.log(app);
   return <>
       <ScrollUp/>
       <Header/>
