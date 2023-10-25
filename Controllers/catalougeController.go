@@ -1,16 +1,12 @@
 package Controllers
 
 import (
-	"bytes"
-	"context"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"hs/headstart/Database"
-	"io"
+	"hs/headstart/Utils"
 	"log"
 	"net/http"
-	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func GetAllCatalouges(ctx *gin.Context) {
@@ -40,39 +36,38 @@ func GetAllCatalouges(ctx *gin.Context) {
 
 func PostACatalouge(ctx *gin.Context) {
 	// TODO: do sanitization
-
 	name := ctx.PostForm("name")
 	description := ctx.PostForm("description")
 	imageHeader, _ := ctx.FormFile("image")
 	zipHeader, _ := ctx.FormFile("zip")
-	imageReader, err := imageHeader.Open()
 
+	imgBuffer, err := Utils.MultipartFileBuffer(imageHeader)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	imageBytes := make([]byte, imageHeader.Size)
-	_, err = imageReader.Read(imageBytes)
+	zipBuffer, err := Utils.MultipartFileBuffer(zipHeader)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
 
-	buf := bytes.NewBuffer(imageBytes)
-	c, cancel := context.WithTimeout(ctx, time.Second*50)
-	defer cancel()
-
-	wc := Database.Bucket.Object("Prebuilt/" + imageHeader.Filename).NewWriter(c)
-	if _, err = io.Copy(wc, buf); err != nil {
-		_ = fmt.Errorf("io.Copy: %w", err)
+	if err :=
+		Database.UploadToCloudStorage("images/"+imageHeader.Filename, imgBuffer); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	// Data can continue to be added to the file until the writer is closed.
-	if err := wc.Close(); err != nil {
-		_ = fmt.Errorf("Writer.Close: %w", err)
+
+	if err :=
+		Database.UploadToCloudStorage("Prebuilt/"+zipHeader.Filename, zipBuffer); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	imagePublicUrl := Database.PublicURL("images/" + imageHeader.Filename)
+
 
 	fmt.Printf("%s uploaded to bucket.\n", imageHeader.Filename)
-	log.Printf("%v", imageReader)
-
 	log.Printf("%s %s %s %s", name, description, imageHeader.Filename, zipHeader.Filename)
+	log.Printf("%s\n", imagePublicUrl)
 
 }
